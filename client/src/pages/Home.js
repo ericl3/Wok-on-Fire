@@ -15,7 +15,7 @@ class Home extends Component {
             height: "99vh"
         }
         return (
-            <body>
+            <body style = {{fontFamily: 'Montserrat'}}>
                 <Container fluid style={containerStyle}>
                     <Navbar></Navbar>
                     <br></br>

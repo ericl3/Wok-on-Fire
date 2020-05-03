@@ -5,11 +5,11 @@ import { Container, Row, Col, Button, Table } from 'react-bootstrap'
 class Home extends Component {
     render() {
         const mystyle = {
-            width: "45vw",
-            height: "75vh"
+            width: "50%",
+            height: "50%"
           };
         const containerStyle = {
-            border: "solid 4px red",
+            border: "solid 4px #A61800",
             height: "99vh"
         }
         return (

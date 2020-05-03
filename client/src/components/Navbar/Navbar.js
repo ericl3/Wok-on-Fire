@@ -4,10 +4,17 @@ import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 
 
-class Navbar extends Component {
+class NavBar extends Component {
     render() {
-
+        return(
+<Navbar>
+  <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
+  <Navbar.Toggle />
+  <Navbar.Collapse className="justify-content-end">
+  </Navbar.Collapse>
+</Navbar>
+        )
     }
 }
 
-export default Navbar;
+export default NavBar;

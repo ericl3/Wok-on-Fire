@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Container, Row, Col, Button, Table } from 'react-bootstrap'
 
+import Navbar from '../components/Navbar/Navbar'
+
 class Home extends Component {
     render() {
         const mystyle = {
@@ -15,6 +17,8 @@ class Home extends Component {
         return (
             <body>
                 <Container fluid style={containerStyle}>
+                    <Navbar></Navbar>
+                    <br></br>
                     <Row>
                         <Col>
                             <center><img src={require("../images/logo.png")}/></center>

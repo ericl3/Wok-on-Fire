@@ -8,9 +8,7 @@ class Home extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <div>
-                            <p>Wok on Fire</p>
-                        </div>
+                        <center><img src="../../images/logo.png"/></center>
                     </Col>
                 </Row>
             </Container>
@@ -19,3 +17,4 @@ class Home extends Component {
 }
 
 export default Home
+

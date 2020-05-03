@@ -12,22 +12,15 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 
 function App() {
   return (
     <div>
-      <Navbar>
-  <Navbar.Brand href="#home">Menu</Navbar.Brand>
-  <Navbar.Toggle />
-  <Navbar.Collapse className="justify-content-end">
-  </Navbar.Collapse>
-</Navbar>
-    <Router>
-      <Switch>
-        <Route exact path = "/" component = { Home } />
-      </Switch>
-    </Router>
+      <Router>
+        <Switch>
+          <Route exact path = "/" component = { Home } />
+        </Switch>
+      </Router>
     </div>
   );
 }

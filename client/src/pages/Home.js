@@ -8,7 +8,7 @@ class Home extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <center><img src="../../images/logo.png"/></center>
+                        <center><img src={require("../images/logo.png")}/></center>
                     </Col>
                 </Row>
             </Container>

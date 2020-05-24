@@ -4,6 +4,8 @@ import './App.css';
 
 // Pages
 import Home from '../src/pages/Home';
+import Order from '../src/pages/Order'
+import OrderConfirmation from '../src/pages/OrderConfirmation'
 
 // Tools
 import {
@@ -19,6 +21,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path = "/" component = { Home } />
+          <Route exact path = "/order" component = { Order } />
+          <Route exact path = "/order-confirmation" component = {OrderConfirmation}/>
         </Switch>
       </Router>
     </div>

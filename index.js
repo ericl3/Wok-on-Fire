@@ -18,6 +18,6 @@ app.use(
 // Calling this will mount the routes onto the express app. (Using the code found in index.js within routes foler)
 mountRoutes(app)
 
-app.listen(0915, () => {
+app.listen(process.env.PORT || 0915, () => {
     console.log('Wok-on-Fire API running on port 0915!')
 });

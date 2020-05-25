@@ -59,7 +59,7 @@ class Order extends Component {
             if (pstDate.getDay() === 0) {
                 if (hour < 11 || hour >= 20) {
                     this.setState({
-                        availabe: false
+                        available: false
                     }, () => this.setMealTime())
                 } else {
                     this.setState({

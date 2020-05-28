@@ -8,28 +8,72 @@ const authToken = process.env.TWILIO_API_KEY
 const twilioClient = require('twilio')(accountSid, authToken);
 
 exports.createOrderWokOnFire = async(req, res) => {
+    var oid = Math.random().toString(36).substr(2, 7)
     var name = req.body.name;
     var phone = req.body.phone;
     var email = req.body.email;
     var location = req.body.location;
     var grillOrders = req.body.grillOrders;
     var kitchenOrders = req.body.kitchenOrders;
-    var additionalInstructionsOrder = req.body.additionalInstructionsOrder;
+    var additionalInstructionsOrder = isEmpty(req.body.additionalInstructionsOrder) ? "None" : req.body.additionalInstructionsOrder;
     var subtotal = req.body.subtotal
     var deal = req.body.deal
     var tax = req.body.tax
     var total = req.body.total
+    var subtotalMinusDeal = subtotal - deal
     var receiveText = req.body.receiveText
+    var lunch = req.body.lunch
+    var replyPhone = location === "Gig Harbor" ? "(253) 358-3071" : "(360) 692-3414"
+
+    for (var i = 0; i < grillOrders.length; i++) {
+        grillOrders[i].additionalIngredients = grillOrders[i].additionalIngredients.join(", ")
+        if (lunch) {
+            grillOrders[i].price  = (9.99 + grillOrders[i].proteinExtraPrice)
+        } else {
+            grillOrders[i].price = (11.99 + grillOrders[i].proteinExtraPrice)
+        }
+    }
+    
+    const receiptPayload = {
+        name: name,
+        oid: oid,
+        location: location,
+        email: email,
+        grillOrders: grillOrders,
+        kitchenOrders: kitchenOrders,
+        additionalInstructionsOrder: additionalInstructionsOrder,
+        subtotal: subtotal,
+        deal: deal,
+        subtotalMinusDeal: subtotalMinusDeal,
+        tax: tax,
+        total: total,
+        replyPhone: replyPhone,
+        phone: phone,
+        orderType: lunch ? "Lunch" : "Dinner"
+    }
 
     console.log(req.body)
 
     if (receiveText) {
         try {
             await sendText(name, phone, email, location)
-            return res.status(200).send({success: "Text sent successfully"})
         } catch (err) {
             return res.status(400).send({ error: err})
         }
+    }
+
+    try {
+        await sendEmailCustomer(receiptPayload)
+    } catch (err) {
+        return res.status(400).send({ error: err})
+    }
+
+    try {
+        await sendEmailEmployees(receiptPayload)
+        return res.status(200).send({success: "Booyah"})
+    } catch (err) {
+        console.log(err)
+        return res.status(400).send({error: err})
     }
     
     // try {
@@ -43,12 +87,35 @@ exports.createOrderWokOnFire = async(req, res) => {
 
 }
 
-const sendEmailCustomer = async (name, phone, email, location, order, instructions, price) => {
+const sendEmailCustomer = async (receiptPayload) => {
     const msg = {
-        to: email,
         from: 'wokonfirebusiness@gmail.com',
-        subject: 'Your Wok on Fire Order',
-        text: 'Hey! This is your order!'
+        personalizations: 
+            [
+                {
+                    to: [{email: receiptPayload.email}],
+                    dynamic_template_data: receiptPayload
+                }
+
+            ],
+        template_id: "d-144ea8776f434748a1cf1e6aaa07b6ab"
+    }
+
+    return await sgMail.send(msg);
+}
+
+const sendEmailEmployees = async (orderPayload) => {
+    const msg = {
+        from: 'wokonfirebusiness@gmail.com',
+        personalizations: 
+            [
+                {
+                    to: [{email: "wokonfirebusiness@gmail.com"}],
+                    dynamic_template_data: orderPayload
+                }
+
+            ],
+        template_id: "d-238740c3480f42278110a7ff2398a1b5"
     }
 
     return await sgMail.send(msg);

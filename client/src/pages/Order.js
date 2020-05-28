@@ -181,8 +181,8 @@ class Order extends Component {
             id: Math.random().toString(36).substr(2, 7),
             baseProtein: this.state.baseProtein,
             proteinExtraPrice: this.state.proteinExtraPrice,
-            additionalIngredients: this.state.additionalIngredients,
-            additionalInstructionsGrill: this.state.additionalInstructionsGrill
+            additionalIngredients: isEmpty(this.state.additionalIngredients) ? "None" : this.state.additionalIngredients,
+            additionalInstructionsGrill: isEmpty(this.state.additionalInstructionsGrill) ? "None" : this.state.additionalInstructionsGrill
         }
         this.notifyAdd()
         this.setState({
@@ -357,10 +357,11 @@ class Order extends Component {
                 kitchenOrders: this.state.kitchenOrders,
                 additionalInstructionsOrder: this.state.additionalInstructionsOrder,
                 subtotal: this.state.subtotal,
-                deal: this.state.subtotal,
+                deal: this.state.deal,
                 tax: this.state.tax,
                 total: this.state.total,
-                receiveText: this.state.receiveText
+                receiveText: this.state.receiveText,
+                lunch: this.state.lunch
             })
             window.location.href = '/order-confirmation';
         } catch (err) {

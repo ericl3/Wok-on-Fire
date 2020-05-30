@@ -51,6 +51,9 @@ class OrderConfirmation extends Component {
                         <Col className="text-center">
                             <p>Thank you for placing your order!</p>
                             <p>Please check your email for an order confirmation (and text message if applicable)</p>
+                            <p>If you did not receive an email confirmation (check spam/junk) please call us at: </p>
+                            <p><b>Gig Harbor:</b> (253) 358-3071</p>
+                            <p><b>Silverdale:</b> (360) 692-3414</p>
                             <Button onClick={() => window.location.href = "/"}>Home</Button>
                         </Col>
                     </Row>

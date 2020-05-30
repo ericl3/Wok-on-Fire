@@ -26,11 +26,13 @@ exports.createOrderWokOnFire = async(req, res) => {
     var replyPhone = location === "Gig Harbor" ? "(253) 358-3071" : "(360) 692-3414"
 
     for (var i = 0; i < grillOrders.length; i++) {
-        grillOrders[i].additionalIngredients = grillOrders[i].additionalIngredients.join(", ")
+        grillOrders[i].additionalIngredients = isEmpty(grillOrders[i].additionalIngredients) ? "None" : grillOrders[i].additionalIngredients.join(", ")
+        grillOrders[i].sauces = isEmpty(grillOrders[i].sauces) ? "None" : grillOrders[i].sauces.join(", ")
+        grillOrders[i].toGoSauces = isEmpty(grillOrders[i].toGoSauces) ? "None" : grillOrders[i].toGoSauces.join(", ")
         if (lunch) {
             grillOrders[i].price  = (9.99 + grillOrders[i].proteinExtraPrice)
         } else {
-            grillOrders[i].price = (11.99 + grillOrders[i].proteinExtraPrice)
+            grillOrders[i].price = (13.99 + grillOrders[i].proteinExtraPrice)
         }
     }
     

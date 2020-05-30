@@ -31,7 +31,9 @@ class Order extends Component {
             stage: 0,
             baseProtein: 'Beef',
             proteinExtraPrice: 0.0,
-            additionalIngredients: ["Noodles", "Broccoli", "Onion", "Green Onion", "Carrot", "Mushroom", "Mongolian House Sauce"],
+            additionalIngredients: ["Noodles", "Broccoli", "Onion", "Green Onion", "Carrot", "Mushroom"],
+            sauces: [],
+            toGoSauces: [],
             additionalInstructionsGrill: '',  
             additionalInstructionsOrder: '', 
             lunch: '',
@@ -147,6 +149,33 @@ class Order extends Component {
         }
     }
 
+    handleSauceChange = e => {
+        console.log("what is happening")
+        const index = this.state.sauces.indexOf(e.target.value)
+        if (index > -1) {
+            this.setState({
+                sauces: this.state.sauces.filter((sauce) => sauce !== e.target.value)
+            })
+        } else {
+            this.setState({
+                sauces: [...this.state.sauces, e.target.value]
+            })
+        }
+    }
+
+    handleToGoSauceChange = e=> {
+        const index = this.state.toGoSauces.indexOf(e.target.value)
+        if (index > -1) {
+            this.setState({
+                toGoSauces: this.state.toGoSauces.filter((sauce) => sauce !== e.target.value)
+            })
+        } else {
+            this.setState({
+                toGoSauces: [...this.state.toGoSauces, e.target.value]
+            })
+        }
+    }
+
     handleChange= e => {
         this.setState({
             [e.target.name]: e.target.value
@@ -162,6 +191,8 @@ class Order extends Component {
     decrementStage = () => {
         this.setState({
             stage: this.state.stage - 1
+        }, () => {
+            document.getElementById('order-form').scrollIntoView({behavior: "smooth"})
         })
     }
 
@@ -169,7 +200,13 @@ class Order extends Component {
         console.log(this.state)
         this.setState({
             stage: this.state.stage + 1
-        }, () => {if (this.state.stage == 3) {document.getElementById('cart').scrollIntoView({behavior: "smooth"})}})
+        }, () => {
+            if (this.state.stage === 4) {
+                document.getElementById('cart').scrollIntoView({behavior: "smooth"})
+            } else {
+                document.getElementById('order-form').scrollIntoView({behavior: "smooth"})
+            }
+        })
     }
 
     notifyAdd = () => toast.info("🥡 Added to Order!")
@@ -181,7 +218,9 @@ class Order extends Component {
             id: Math.random().toString(36).substr(2, 7),
             baseProtein: this.state.baseProtein,
             proteinExtraPrice: this.state.proteinExtraPrice,
-            additionalIngredients: isEmpty(this.state.additionalIngredients) ? "None" : this.state.additionalIngredients,
+            additionalIngredients: this.state.additionalIngredients,
+            sauces: this.state.sauces,
+            toGoSauces: this.state.toGoSauces,
             additionalInstructionsGrill: isEmpty(this.state.additionalInstructionsGrill) ? "None" : this.state.additionalInstructionsGrill
         }
         this.notifyAdd()
@@ -189,7 +228,9 @@ class Order extends Component {
             grillOrders: [grillOrder, ...this.state.grillOrders],
             baseProtein: 'Beef',
             proteinExtraPrice: 0.0,
-            additionalIngredients: ["Noodles", "Broccoli", "Onion", "Green Onion", "Carrot", "Mushroom", "Mongolian House Sauce"],
+            additionalIngredients: ["Noodles", "Broccoli", "Onion", "Green Onion", "Carrot", "Mushroom"],
+            sauces: [],
+            toGoSauces: [],
             additionalInstructionsGrill: '',  
         }, () => this.calculatePrices())
         this.advanceStage()
@@ -227,7 +268,7 @@ class Order extends Component {
         if (this.state.lunch) {
             return "$" + (9.99 + this.state.grillOrders[index].proteinExtraPrice) + " (Lunch)"
         } else {
-            return "$" + (11.99 + this.state.grillOrders[index].proteinExtraPrice) + " (Dinner)"
+            return "$" + (13.99 + this.state.grillOrders[index].proteinExtraPrice) + " (Dinner)"
         }
     }
 
@@ -235,7 +276,7 @@ class Order extends Component {
         if (this.state.lunch) {
             return 9.99 + this.state.grillOrders[index].proteinExtraPrice
         } else {
-            return 11.99 + this.state.grillOrders[index].proteinExtraPrice
+            return 13.99 + this.state.grillOrders[index].proteinExtraPrice
         }
     }
 
@@ -245,14 +286,20 @@ class Order extends Component {
         this.notifyRemove()
         this.setState({
             grillOrders: this.state.grillOrders.filter((grillOrder) => grillOrder.id !== id)
-        }, () => this.calculatePrices())
+        }, () => {
+            this.calculatePrices()
+            document.getElementById('cart').scrollIntoView({behavior: "smooth"})
+        })
     }
 
     removeFromOrdersKitchen = (id) => {
         this.notifyRemove()
         this.setState({
             kitchenOrders: this.state.kitchenOrders.filter((kitchenOrder) => kitchenOrder.id !== id)
-        }, () => this.calculatePrices())
+        }, () => {
+            this.calculatePrices()
+            document.getElementById('cart').scrollIntoView({behavior: "smooth"})
+        })
 
     }
 
@@ -416,14 +463,15 @@ class Order extends Component {
                         <Row>
                             <Col>
                                 <Form>
-                                    <Form.Label><p>Step 2: Edit Base Ingredients </p></Form.Label>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Noodles")} label="Noodles" value="Noodles" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Broccoli")} label="Broccoli" value="Broccoli" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Onion")} label="Onion" value="Onion" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Green Onion")} label="Green Onion" value="Green Onion" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Carrot")} label="Carrot" value="Carrot" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Mushroom")} label="Mushroom" value="Mushroom" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Mongolian House Sauce")} label="Mongolian House Sauce" value="Mongolian House Sauce" onChange={(e) => this.handleIngredientChange(e)}/>
+                                    <Form.Group>
+                                        <Form.Label><p>Step 2: Edit Base Ingredients </p></Form.Label>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Noodles")} label="Noodles" value="Noodles" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Broccoli")} label="Broccoli" value="Broccoli" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Onion")} label="Onion" value="Onion" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Green Onion")} label="Green Onion" value="Green Onion" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Carrot")} label="Carrot" value="Carrot" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Mushroom")} label="Mushroom" value="Mushroom" onChange={(e) => this.handleIngredientChange(e)}/>
+                                    </Form.Group>
                                 </Form>
                             </Col>
                         </Row>
@@ -431,13 +479,20 @@ class Order extends Component {
                         <Row>
                             <Col>
                                 <Form>
-                                    <Form.Label><p>Step 3: Select Additional Ingredients (No Extra Cost)</p></Form.Label>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Tofu")} label="Tofu" value="Tofu" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Pineapple")} label="Pineapple" value="Pineapple" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Celery")} label="Celery" value="Celery" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Green Pepper")} label="Green Pepper" value="Green Pepper" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Bean Sprout")} label="Bean Sprout" value="Bean Sprout" onChange={(e) => this.handleIngredientChange(e)}/>
-                                    <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Hot Sauce")} label="Hot Sauce" value="Hot Sauce" onChange={(e) => this.handleIngredientChange(e)}/>
+                                    <Form.Group>
+                                        <Form.Label><p>Step 3: Select Additional Ingredients (No Extra Cost)</p></Form.Label>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Tofu")} label="Tofu" value="Tofu" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Pineapple")} label="Pineapple" value="Pineapple" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Cilantro")} label="Cilantro" value="Cilantro" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Celery")} label="Celery" value="Celery" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Green Pepper")} label="Green Pepper" value="Green Pepper" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Bell Pepper")} label="Bell Pepper" value="Bell Pepper" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Bean Sprout")} label="Bean Sprout" value="Bean Sprout" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Cabbage")} label="Cabbage" value="Cabbage" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Zucchini")} label="Zucchini" value="Zucchini" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Water Chestnut")} label="Water Chestnut" value="Water Chestnut" onChange={(e) => this.handleIngredientChange(e)}/>
+                                        <Form.Check defaultChecked = {this.state.additionalIngredients.includes("Bamboo Shoot")} label="Bamboo Shoot" value="Bamboo Shoot" onChange={(e) => this.handleIngredientChange(e)}/>
+                                    </Form.Group>
                                 </Form>
                             </Col>
                         </Row>
@@ -454,13 +509,57 @@ class Order extends Component {
                         </Row>
                     </div>
                 )
-        } else if (this.state.stage === 2) {
+        } else if (this.state.stage === 2){
             grillOrderForm = 
                 (
                     <div>
                         <Row>
                             <Col>
-                                <p>Step 4: Review</p>
+                                <Form>
+                                    <Form.Label><p>Step 4: Choose Sauces</p></Form.Label>
+                                    <Form.Check defaultChecked = {this.state.sauces.includes("Mongolian Sauce")} label="Mongolian Sauce" value="Mongolian Sauce" onChange={(e) => this.handleSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.sauces.includes("Garlic Sauce")} label="Garlic Sauce" value="Garlic Sauce" onChange={(e) => this.handleSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.sauces.includes("Asian Sweet Sauce")}label="Asian Sweet Sauce" value="Asian Sweet Sauce" onChange={(e) => this.handleSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.sauces.includes("Hot Sauce")} label="Hot Sauce" value="Hot Sauce" onChange={(e) => this.handleSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.sauces.includes("RIce Wine Sauce")} label="Rice Wine Sauce" value="Rice Wine Sauce" onChange={(e) => this.handleSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.sauces.includes("Oyster Sauce")} label="Oyster Sauce" value="Oyster Sauce" onChange={(e) => this.handleSauceChange(e)}/>
+                                </Form>
+                            </Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <Col>
+                                <Form>
+                                    <Form.Label><p>Step 5: Choose To-Go Sauces</p></Form.Label>
+                                    <Form.Check defaultChecked = {this.state.toGoSauces.includes("Mongolian Sauce")} label="Mongolian Sauce" value="Mongolian Sauce" onChange={(e) => this.handleToGoSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.toGoSauces.includes("Hot Sauce")} label="Hot Sauce" value="Hot Sauce" onChange={(e) => this.handleToGoSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.toGoSauces.includes("Hoisin Sauce")} label="Hoisin Sauce" value="Hoisin Sauce" onChange={(e) => this.handleToGoSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.toGoSauces.includes("Soy Sauce")} label="Soy Sauce" value="Soy Sauce" onChange={(e) => this.handleToGoSauceChange(e)}/>
+                                    <Form.Check defaultChecked = {this.state.toGoSauces.includes("Sriracha")} label="Sriracha" value="Sriracha" onChange={(e) => this.handleToGoSauceChange(e)}/>
+                                </Form>
+                            </Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <Col>
+                                <Button onClick={() => this.decrementStage()} style={{marginRight: '0.5rem'}}>
+                                        Back
+                                </Button>
+                                <Button onClick={() => this.advanceStage()}>
+                                        Next
+                                </Button>
+                            </Col>
+                        </Row>
+                    </div>
+                )
+
+        } else if (this.state.stage === 3) {
+            grillOrderForm = 
+                (
+                    <div>
+                        <Row>
+                            <Col>
+                                <p>Step 6: Review</p>
                                 <p>Protein: {this.state.baseProtein}</p>
                                 <p>Toppings/Ingredients: </p>
                                 <ul>
@@ -477,7 +576,7 @@ class Order extends Component {
                         <Row>
                             <Col>
                                 <Form.Group>
-                                    <Form.Label><p>Step 5: Additional Insturctions</p></Form.Label>
+                                    <Form.Label><p>Step 7: Additional Insturctions (Allergies, etc.)</p></Form.Label>
                                     <Form.Control as="textarea" rows="3" name="additionalInstructionsGrill" onChange = {(e) => this.handleChange(e)}/>
                                 </Form.Group>
                             </Col>
@@ -508,7 +607,6 @@ class Order extends Component {
                         </Row>
                     </div>
                 )
-
         }
 
         let grillOrders; 
@@ -522,7 +620,9 @@ class Order extends Component {
                                 <p>1x Grill Order:</p>
                                 <ul>
                                     <li>Base Protein: <p>{grillOrder.baseProtein}</p></li>
-                                    <li>Ingredients/Toppings: <p>{grillOrder.additionalIngredients.join(', ')}</p></li>
+                                    <li>Ingredients/Toppings: <p>{isEmpty(grillOrder.additionalIngredients) ? "None" : grillOrder.additionalIngredients.join(', ')}</p></li>
+                                    <li>Sauces: <p>{isEmpty(grillOrder.sauces) ? "None": grillOrder.sauces.join(', ')}</p></li>
+                                    <li>To-Go Sauces: <p>{isEmpty(grillOrder.toGoSauces) ? "None" : grillOrder.toGoSauces.join(', ')}</p></li>
                                     <li>Additional Instructions: {isEmpty(grillOrder.additionalInstructionsGrill) ? <p> None </p> : <p>{grillOrder.additionalInstructionsGrill}</p>}</li>
                                     <li>Price: {this.getGrillPriceForCart(index)} </li>
                                 </ul>
@@ -543,13 +643,20 @@ class Order extends Component {
             (
                 <div>
                     <h5 style={{marignTop: '1rem'}}>Entrees</h5>
-                    <EntreeCard name="Bulgolgi" desc="famous korean dish, sliced beef marinated in soy sauce" price="12.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Spicy Pork Bulgolgi" desc="famous korean dish, sliced pork marinated in spicy chili sauce" price="11.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Spicy Chicken Bulgolgi" desc="sliced chicken marinated in spicy chili sauce" price="11.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Bulgolgi Bowl" desc="famous korean dish, sliced beef marinated in soy sauce" price="10.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Spicy Pork Bulgolgi Bowl" desc="famous korean dish, sliced pork marinated in spicy chili sauce" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Orange Chicken Bowl" desc="orange chicken served with rice" price="8.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Pineapple Chicken Bowl" desc="pineapple chicken served with rice" price="8.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Garlic Chicken Bowl" desc="garlic chicken served with rice" price="8.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+
                     <h5 style={{marginTop: '1.5rem'}}>Sides/Appetizers</h5>
                     <EntreeCard name="Egg Rolls" desc="2 pcs. per order" price="3.49" type="side" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Chicken Wings (Non-Spicy)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Chicken Wings (Spicy)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Chicken Wings (Regular)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Chicken Wings (Honey Garlic)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Chicken Wings (Spicy Honey Garlic)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Chicken Wings (Orange Honey Garlic)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Gyoza (4 pcs.)" desc="4 pcs. per order" price="3.99" type="side" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Gyoza (6 pcs.)" desc="6 pcs. per order" price="4.99" type="side" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Kimchi" desc="side portion" price="1.99" type="side" addToOrder={this.addToOrderKitchen}/>
                 </div>
             )
@@ -598,12 +705,30 @@ class Order extends Component {
         drinksMenu = 
                 (
                     <div>
-                        <h4 style={{marginTop: '1rem'}}></h4>
+                        <h5>Fountain Drinks</h5>
                         <EntreeCard name="Pepsi" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Diet Pepsi" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Mountain Dew" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Sierra Mist" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Root Beer" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Mug Root Beer" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Dr. Pepper" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <br/>
+                        <h5>Bubble Tea</h5>
+                        <EntreeCard name="Thai" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Thai" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Black" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Black" desc = "with tapioca pearls"price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Taro" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Taro" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Matcha" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Matcha" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Lavender" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Lavender" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Strawberry" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Strawberry" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Mango" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Mango" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Pineapple" desc = "no pearls" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Pineapple" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                     </div>
                 )
 
@@ -642,7 +767,7 @@ class Order extends Component {
         } else {
             orderPage = 
                 (
-                    <Container fluid style={{marginBottom: '1rem', marginTop: '1rem'}}>
+                    <Container fluid style={{marginBottom: '1rem', marginTop: '1rem', width: '90vw', fontFamily: 'montserrat'}}>
                         <ToastContainer pauseOnHover={false} autoClose={1500}/>
                         <Modal show={this.state.showModal} size="lg" centered id="contained-modal-title-vcenter">
                             <Modal.Header>
@@ -707,7 +832,7 @@ class Order extends Component {
                         </Row>
                         <Row>
                             <Col>
-                                <Card body className="shadow-sm">
+                                <Card body className="shadow-sm" id="order-form">
                                     <Row>
                                         <Col>
                                             <Tabs defaultActiveKey="grill" id="uncontrolled-tab-example"> 
@@ -715,9 +840,10 @@ class Order extends Component {
                                                     <div style={{marginTop: '2rem'}}>
                                                         <Row>
                                                             <Col>
-                                                                <p>Order Mongrolian Grill (served with rice) using the form below:</p>
+                                                                <p>Order Mongrolian Grill (served with rice and miso soup) using the form below:</p>
                                                                 <p>Lunch: $9.99</p>
-                                                                <p>Dinner: $12.99</p>
+                                                                <p>Dinner: $13.99</p>
+                                                                <p>We are currently serving: {this.state.lunch? "Lunch" : "Dinner"}</p>
                                                                 <p>We are offering a "buy one get one 50% off" promotion (entrees and grill orders only)! Promotion will show when adding two or more items to your order (applies only once per order).</p>
                                                             </Col>
                                                         </Row>
@@ -750,6 +876,10 @@ class Order extends Component {
                                                         <Row>
                                                             <Col>
                                                                 <p>Add any Pepsi fountain drinks to your order for $2.49</p>
+                                                                <p>We also sell bubble tea for $3.99 (+$0.50 for tapioca pearls)</p>
+                                                                <ul>
+                                                                    <li>Our flavors include: thai, black, taro, matcha, lavender, strawberry, pineapple, mango</li>
+                                                                </ul>
                                                             </Col>
                                                         </Row>
                                                         <hr/>

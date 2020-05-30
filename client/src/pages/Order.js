@@ -44,7 +44,7 @@ class Order extends Component {
             name: '',
             email: '',
             phone: '',
-            location: 'Gig Harbor',
+            location: 'Silverdale',
             showModal: false,
             receiveText: false,
             errors: {},
@@ -933,9 +933,10 @@ class Order extends Component {
                                                     as="select"
                                                     name="location"
                                                     onChange={(e) => this.handleChangeLocation(e)}
+                                                    disabled={true}
                                                 >
-                                                    <option value = "Gig Harbor">Gig Harbor</option>
                                                     <option value = "Silverdale">Silverdale</option>
+                                                    <option value = "Gig Harbor">Gig Harbor</option>
                                                 </Form.Control>
                                             </Form>
                                         </Col>

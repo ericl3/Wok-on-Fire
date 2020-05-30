@@ -722,7 +722,7 @@ class Order extends Component {
                         <EntreeCard name="Matcha (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Matcha (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Lavender (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Lavender (with tapioca pearls" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Lavender (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Strawberry (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Strawberry (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Mango (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>

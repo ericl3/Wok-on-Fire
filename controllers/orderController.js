@@ -77,15 +77,6 @@ exports.createOrderWokOnFire = async(req, res) => {
         console.log(err)
         return res.status(400).send({error: err})
     }
-    
-    // try {
-    //     await sendEmailCustomer(name, phone, email, location, order, instructions, price);
-    // } catch (err) {
-    //     console.log(err);
-    //     return res.status(400).send({ error: err })
-    // }
-
-    // return res.status(200).send({ success: "Order submitted successfully"})
 
 }
 

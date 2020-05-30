@@ -714,21 +714,21 @@ class Order extends Component {
                         <br/>
                         <h5>Bubble Tea</h5>
                         <EntreeCard name="Thai (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Thai (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Thai (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Black (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Black (with tapioca pearls)" desc = "with tapioca pearls"price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Black (with tapioca pearls)"price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Taro (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Taro (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Taro (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Matcha (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Matcha (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Matcha (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Lavender (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Lavender (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Lavender (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Strawberry (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Strawberry (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Strawberry (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Mango (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Mango (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Mango (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Pineapple (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Pineapple (with tapioca pearls)" desc = "with tapioca pearls" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Pineapple (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                     </div>
                 )
 

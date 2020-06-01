@@ -727,8 +727,8 @@ class Order extends Component {
                         <EntreeCard name="Strawberry (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Mango (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Mango (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Pineapple (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Pineapple (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Coconut (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Coconut (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                     </div>
                 )
 

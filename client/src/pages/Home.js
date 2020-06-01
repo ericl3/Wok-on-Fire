@@ -7,8 +7,8 @@ import Navbar from '../components/Navbar/Navbar'
 class Home extends Component {
     render() {
         const mystyle = {
-            width: "50%",
-            height: "50%"
+            width: "75%",
+            height: "75%"
           };
         return (
             <body style = {{fontFamily: 'Montserrat'}}>

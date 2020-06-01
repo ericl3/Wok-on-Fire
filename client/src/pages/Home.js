@@ -10,10 +10,6 @@ class Home extends Component {
             width: "50%",
             height: "50%"
           };
-        const containerStyle = {
-            border: "solid 4px #A61800",
-            height: "99vh"
-        }
         return (
             <body style = {{fontFamily: 'Montserrat'}}>
                 <Container fluid style={containerStyle}>

@@ -12,7 +12,7 @@ class Home extends Component {
           };
         return (
             <body style = {{fontFamily: 'Montserrat'}}>
-                <Container fluid style={containerStyle}>
+                <Container fluid>
                     <Navbar></Navbar>
                     <br></br>
                     <Row>

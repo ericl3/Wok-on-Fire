@@ -933,7 +933,6 @@ class Order extends Component {
                                                     as="select"
                                                     name="location"
                                                     onChange={(e) => this.handleChangeLocation(e)}
-                                                    disabled={true}
                                                 >
                                                     <option value = "Silverdale">Silverdale</option>
                                                     <option value = "Gig Harbor">Gig Harbor</option>

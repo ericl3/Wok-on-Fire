@@ -827,7 +827,7 @@ class Order extends Component {
                         </Modal>
                         <Row>
                             <Col>
-                                <h1> Online Order Form (Gig Harbor Currently Closed) </h1>
+                                <h1> Online Order Form </h1>
                             </Col>
                         </Row>
                         <Row>
@@ -935,7 +935,7 @@ class Order extends Component {
                                                     onChange={(e) => this.handleChangeLocation(e)}
                                                 >
                                                     <option value = "Silverdale">Silverdale</option>
-                                                    <option disabled={true} value = "Gig Harbor">Gig Harbor</option>
+                                                    <option value = "Gig Harbor">Gig Harbor</option>
                                                 </Form.Control>
                                             </Form>
                                         </Col>

@@ -59,7 +59,7 @@ class Order extends Component {
             // Sundays 11AM - 8PM, all others 11AM - 9PM
             // Acual Time Gating Code
             if (pstDate.getDay() === 0) {
-                if (hour < 11 || hour >= 20) {
+                if (hour < 11 || hour >= 19) {
                     this.setState({
                         available: false
                     }, () => this.setMealTime())
@@ -69,7 +69,7 @@ class Order extends Component {
                     }, () => this.setMealTime())
                 }
             } else {
-                if (hour < 11 || hour >= 21) {
+                if (hour < 11 || hour >= 20) {
                     this.setState({
                         available: false
                     }, () => this.setMealTime())

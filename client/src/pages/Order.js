@@ -757,8 +757,8 @@ class Order extends Component {
                         <Col className="text-center">
                             <img src={require("../images/logo.png")} style={{marginBottom: '1rem'}}/>
                             <p>Thank you for visiting our online order form! We are currently closed. Our hours are as follows:</p>
-                            <p>Mon-Sat: 11AM - 9PM</p>
-                            <p>Sun: 11AM - 8PM</p>
+                            <p>Mon-Sat: 11AM - 8PM</p>
+                            <p>Sun: 11AM - 7PM</p>
                             <p>The online order form will re-open during these times. Thank You!</p>
                             <Button href="/">Home</Button>
                         </Col>

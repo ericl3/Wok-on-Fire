@@ -47,6 +47,7 @@ class Order extends Component {
             location: 'Silverdale',
             showModal: false,
             receiveText: false,
+            onlineAvailable: true,
             errors: {},
         }
     }
@@ -56,29 +57,36 @@ class Order extends Component {
             var pstDate = this.getTimePST()
             var hour = pstDate.getHours()
         
-            // Sundays 11AM - 8PM, all others 11AM - 9PM
+            // Sundays 12AM - 7PM, all others 12AM - 8PM
             // Acual Time Gating Code
-            if (pstDate.getDay() === 0) {
-                if (hour < 11 || hour >= 19) {
-                    this.setState({
-                        available: false
-                    }, () => this.setMealTime())
-                } else {
-                    this.setState({
-                        available: true
-                    }, () => this.setMealTime())
-                }
-            } else {
-                if (hour < 11 || hour >= 20) {
-                    this.setState({
-                        available: false
-                    }, () => this.setMealTime())
-                } else {
-                    this.setState({
-                        available: true
-                    }, () => this.setMealTime())
-                }
-            }
+            // if (pstDate.getDay() === 0) {
+            //     if (hour < 12 || hour >= 19) {
+            //         this.setState({
+            //             available: false
+            //         }, () => this.setMealTime())
+            //     } else {
+            //         this.setState({
+            //             available: true
+            //         }, () => this.setMealTime())
+            //     }
+            // } else {
+            //     if (hour < 12 || hour >= 20) {
+            //         this.setState({
+            //             available: false
+            //         }, () => this.setMealTime())
+            //     } else {
+            //         this.setState({
+            //             available: true
+            //         }, () => this.setMealTime())
+            //     }
+            // }
+
+            // Close the online order form
+
+            this.setState({
+                available: false,
+                onlineAvailable: false
+            })
 
             // For testing purposes
             // this.setState({
@@ -737,6 +745,12 @@ class Order extends Component {
 
         let orderPage;
 
+        let availableText = this.state.restaurantAvaiable ? "Thank you for visiting our online order form! We are currently closed. Our hours are as follows:" 
+            : "Our online order form is currently closed for today. We are still open in person at the hours below, and we are still available on Uber Eats and Door Dash."
+
+        let openText = this.state.restaurantAvailable ? "The online order form will re-open during these times. Thank You!" 
+        : "Please check back tomorrow for the online order form's availability"
+
         const { errors } = this.state;
 
         if(isEmpty(this.state.available)) {
@@ -751,19 +765,21 @@ class Order extends Component {
                     </Row>
                 )
         } else if (!this.state.available) {
+        
             orderPage = 
                 (
                     <Row style={{marginTop: '5rem'}}>
                         <Col className="text-center">
                             <img src={require("../images/logo.png")} style={{marginBottom: '1rem'}}/>
-                            <p>Thank you for visiting our online order form! We are currently closed. Our hours are as follows:</p>
-                            <p>Mon-Sat: 11AM - 8PM</p>
-                            <p>Sun: 11AM - 7PM</p>
-                            <p>The online order form will re-open during these times. Thank You!</p>
+                            <p>{availableText}</p>
+                            <p>Mon-Sat: 12PM - 8PM</p>
+                            <p>Sun: 12PM - 7PM</p>
+                            <p>{openText}</p>
                             <Button href="/">Home</Button>
                         </Col>
                     </Row>
                 )
+            
         } else {
             orderPage = 
                 (

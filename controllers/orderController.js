@@ -123,7 +123,7 @@ const sendText = async (name, phone, email, location) => {
 
     textMessage = 'Hi ' + name.split(" ")[0] + ', \n \n' 
         + 'Thank you for placing an order at Wok on Fire (' + location + '). You should have received an order confirmation at your email address: '+ email + '. \n \n' 
-        + 'Your order will be ready for pickup in around 15-20 minutes. \n \n' 
+        + 'Your order will be ready for pickup in around 30-40 minutes. \n \n' 
         + 'If you have any questsions about your order, please call us at ' + replyPhone + '\n \n'
         + '(This is an automated message from an unmonitored phone number. Use above number for inquiries). \n \n'
         + 'Thank you!'

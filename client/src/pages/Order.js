@@ -59,34 +59,34 @@ class Order extends Component {
         
             // Sundays 12AM - 7PM, all others 12AM - 8PM
             // Acual Time Gating Code
-            // if (pstDate.getDay() === 0) {
-            //     if (hour < 12 || hour >= 19) {
-            //         this.setState({
-            //             available: false
-            //         }, () => this.setMealTime())
-            //     } else {
-            //         this.setState({
-            //             available: true
-            //         }, () => this.setMealTime())
-            //     }
-            // } else {
-            //     if (hour < 12 || hour >= 20) {
-            //         this.setState({
-            //             available: false
-            //         }, () => this.setMealTime())
-            //     } else {
-            //         this.setState({
-            //             available: true
-            //         }, () => this.setMealTime())
-            //     }
-            // }
+            if (pstDate.getDay() === 0) {
+                if (hour < 12 || hour >= 19) {
+                    this.setState({
+                        available: false
+                    }, () => this.setMealTime())
+                } else {
+                    this.setState({
+                        available: true
+                    }, () => this.setMealTime())
+                }
+            } else {
+                if (hour < 12 || hour >= 20) {
+                    this.setState({
+                        available: false
+                    }, () => this.setMealTime())
+                } else {
+                    this.setState({
+                        available: true
+                    }, () => this.setMealTime())
+                }
+            }
 
             // Close the online order form
 
-            this.setState({
-                available: false,
-                onlineAvailable: false
-            })
+            // this.setState({
+            //     available: false,
+            //     onlineAvailable: false
+            // })
 
             // For testing purposes
             // this.setState({

@@ -47,7 +47,7 @@ class Order extends Component {
             location: 'Silverdale',
             showModal: false,
             receiveText: false,
-            onlineAvailable: true,
+            restaurantAvailable: true,
             errors: {},
         }
     }

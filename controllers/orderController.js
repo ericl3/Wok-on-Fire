@@ -64,6 +64,28 @@ exports.createOrderWokOnFire = async(req, res) => {
         }
     }
 
+    toTheFamily = "There is an order for " + location + " from " + name + ". Please check your email! Please check your email!"
+
+    //cheyenne dad 2533895658
+
+    phoneNumbers = ['2538207087', '3604713076']//, '2533895658']
+
+    for (var i = 0; i < phoneNumbers.length; i++) {
+        twilioClient.messages
+        .create({
+            body: toTheFamily,
+            from: '+12057281637',
+            to: phoneNumbers[i]
+        }).then(
+            twilioClient.calls.create({
+                twiml: '<Response><Say>You have an order, check your email!</Say></Response>',
+                from: '+12057281637',
+                to: phoneNumbers[i]
+            })
+        )
+    }
+
+
     try {
         await sendEmailCustomer(receiptPayload)
     } catch (err) {
@@ -134,28 +156,4 @@ const sendText = async (name, phone, email, location) => {
             to: phone
         })
         .then(message => console.log(message.sid));
-
-    toTheFamily = "There is an order for " + location + " from " + name + ". Please check your email! Please check your email!"
-
-    //cheyenne dad 2533895658
-
-    phoneNumbers = ['2538207087', '3604713076', '2533895658']
-
-    for (var i = 0; i < phoneNumbers.length; i++) {
-        twilioClient.messages
-        .create({
-            body: toTheFamily,
-            from: '+12057281637',
-            to: phoneNumbers[i]
-        }).then(
-            twilioClient.calls.create({
-                twiml: '<Response><Say>You have an order, check your email!</Say></Response>',
-                from: '+12057281637',
-                to: phoneNumbers[i]
-            })
-        )
-    }
-
-
-
 }

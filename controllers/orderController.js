@@ -68,7 +68,7 @@ exports.createOrderWokOnFire = async(req, res) => {
 
     //cheyenne dad 2533895658
 
-    phoneNumbers = ['2538207087', '3604713076']//, '2533895658']
+    phoneNumbers = ['2538207087', '3604713076', '2533895658']
 
     for (var i = 0; i < phoneNumbers.length; i++) {
         twilioClient.messages

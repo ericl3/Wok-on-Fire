@@ -651,11 +651,11 @@ class Order extends Component {
             (
                 <div>
                     <h5 style={{marignTop: '1rem'}}>Entrees</h5>
-                    <EntreeCard name="Bulgolgi Bowl" desc="famous korean dish, sliced beef marinated in soy sauce" price="10.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Spicy Pork Bulgolgi Bowl" desc="famous korean dish, sliced pork marinated in spicy chili sauce" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Orange Chicken Bowl" desc="orange chicken served with rice" price="8.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Pineapple Chicken Bowl" desc="pineapple chicken served with rice" price="8.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Garlic Chicken Bowl" desc="garlic chicken served with rice" price="8.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Bulgolgi Bowl" desc="famous korean dish, sliced beef marinated in soy sauce" price="11.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Spicy Pork Bulgolgi Bowl" desc="famous korean dish, sliced pork marinated in spicy chili sauce" price="10.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Orange Chicken Bowl" desc="orange chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Pineapple Chicken Bowl" desc="pineapple chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Garlic Chicken Bowl" desc="garlic chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
 
                     <h5 style={{marginTop: '1.5rem'}}>Sides/Appetizers</h5>
                     <EntreeCard name="Egg Rolls" desc="2 pcs. per order" price="3.49" type="side" addToOrder={this.addToOrderKitchen}/>

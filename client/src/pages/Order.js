@@ -81,17 +81,13 @@ class Order extends Component {
                 }
             }
 
-            // Close the online order form
+            // Close the online order form, no matter the time. 
 
-            // this.setState({
-            //     available: false,
-            //     onlineAvailable: false
-            // })
-
-            // For testing purposes
-            // this.setState({
-            //     available: true
-            // })
+            this.setState({
+                available: false,
+                restaurantAvailable: false
+            })
+            
         }, 1500)
         
     }
@@ -745,7 +741,7 @@ class Order extends Component {
 
         let orderPage;
 
-        let availableText = this.state.restaurantAvaiable ? "Thank you for visiting our online order form! We are currently closed. Our hours are as follows:" 
+        let availableText = this.state.restaurantAvailable ? "Thank you for visiting our online order form! We are currently closed. Our hours are as follows:" 
             : "Our online order form is currently closed for today. We are still open in person at the hours below, and we are still available on Uber Eats and Door Dash."
 
         let openText = this.state.restaurantAvailable ? "The online order form will re-open during these times. Thank You!" 

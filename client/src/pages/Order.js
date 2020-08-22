@@ -83,10 +83,10 @@ class Order extends Component {
 
             // Close the online order form, no matter the time. 
 
-            this.setState({
-                available: false,
-                restaurantAvailable: false
-            })
+            // this.setState({
+            //     available: false,
+            //     restaurantAvailable: false
+            // })
             
         }, 1500)
         

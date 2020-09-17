@@ -62,11 +62,11 @@ class Order extends Component {
             if (pstDate.getDay() === 0) {
                 if (hour < 12 || hour >= 19) {
                     this.setState({
-                        available: false
+                        available: false,
                     }, () => this.setMealTime())
                 } else {
                     this.setState({
-                        available: true
+                        available: true,
                     }, () => this.setMealTime())
                 }
             } else {
@@ -154,7 +154,6 @@ class Order extends Component {
     }
 
     handleSauceChange = e => {
-        console.log("what is happening")
         const index = this.state.sauces.indexOf(e.target.value)
         if (index > -1) {
             this.setState({
@@ -770,6 +769,7 @@ class Order extends Component {
                             <p>{availableText}</p>
                             <p>Mon-Sat: 12PM - 8PM</p>
                             <p>Sun: 12PM - 7PM</p>
+                            <p>Gig Harbor is Closed on Sundays</p>
                             <p>{openText}</p>
                             <Button href="/">Home</Button>
                         </Col>
@@ -839,7 +839,7 @@ class Order extends Component {
                         </Modal>
                         <Row>
                             <Col>
-                                <h1> Online Order Form </h1>
+                                <h1> Online Order Form (Gig Harbor is Closed on Sundays)</h1>
                             </Col>
                         </Row>
                         <Row>

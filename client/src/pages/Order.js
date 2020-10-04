@@ -947,7 +947,7 @@ class Order extends Component {
                                                     onChange={(e) => this.handleChangeLocation(e)}
                                                 >
                                                     <option value = "Silverdale">Silverdale</option>
-                                                    <option value = "Gig Harbor">Gig Harbor</option>
+                                                    <option value = "Gig Harbor" disabled={this.getTimePST().getDay() == 0}>Gig Harbor</option>
                                                 </Form.Control>
                                             </Form>
                                         </Col>

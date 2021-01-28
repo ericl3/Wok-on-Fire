@@ -81,6 +81,12 @@ class Order extends Component {
                 }
             }
 
+            // Testing when it's not open (manual test)
+
+            // this.setState({
+            //     available: true
+            // })
+            
             // Close the online order form, no matter the time. 
 
             // this.setState({
@@ -741,10 +747,22 @@ class Order extends Component {
         let orderPage;
 
         let availableText = this.state.restaurantAvailable ? "Thank you for visiting our online order form! We are currently closed. Our hours are as follows:" 
-            : "Our online order form is currently closed for today. We are still open in person at the hours below, and we are still available on Uber Eats and Door Dash."
-
+        : "Our online order form is currently closed for today. We are still open in person at the hours below, and we are still available on Uber Eats and Door Dash."
+              
+        
         let openText = this.state.restaurantAvailable ? "The online order form will re-open during these times. Thank You!" 
         : "Please check back tomorrow for the online order form's availability"
+
+        let hoursColumn;
+        
+        hoursColumn = (
+            <div>
+                <p>Mon-Sat: 12PM - 8PM</p>
+                <p>Sun: 12PM - 7PM</p>
+                <p>Gig Harbor is Closed on Sundays</p>
+                <p>{openText}</p>
+            </div>
+        ) 
 
         const { errors } = this.state;
 
@@ -767,10 +785,7 @@ class Order extends Component {
                         <Col className="text-center">
                             <img src={require("../images/logo.png")} style={{marginBottom: '1rem'}}/>
                             <p>{availableText}</p>
-                            <p>Mon-Sat: 12PM - 8PM</p>
-                            <p>Sun: 12PM - 7PM</p>
-                            <p>Gig Harbor is Closed on Sundays</p>
-                            <p>{openText}</p>
+                            {hoursColumn}
                             <Button href="/">Home</Button>
                         </Col>
                     </Row>
@@ -839,7 +854,8 @@ class Order extends Component {
                         </Modal>
                         <Row>
                             <Col>
-                                <h1> Online Order Form (Gig Harbor is Closed on Sundays)</h1>
+                                {/* <h1> Online Order Form (Gig Harbor is Closed on Sundays)</h1> */}
+                                <h1> Online Order Form (Gig Harbor is currently closed due to State Restrictions. We will reopen Gig Harbor on February 13th) </h1>
                             </Col>
                         </Row>
                         <Row>
@@ -947,7 +963,7 @@ class Order extends Component {
                                                     onChange={(e) => this.handleChangeLocation(e)}
                                                 >
                                                     <option value = "Silverdale">Silverdale</option>
-                                                    <option value = "Gig Harbor" disabled={this.getTimePST().getDay() == 0}>Gig Harbor</option>
+                                                    <option value = "Gig Harbor" disabled={this.getTimePST().getDay() == 0 || true}>Gig Harbor</option>
                                                 </Form.Control>
                                             </Form>
                                         </Col>

@@ -721,7 +721,7 @@ class Order extends Component {
                         <EntreeCard name="Mug Root Beer" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Dr. Pepper" price = "2.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <br/>
-                        <h5>Bubble Tea</h5>
+                        {/* <h5>Bubble Tea</h5>
                         <EntreeCard name="Thai (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Thai (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Black (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
@@ -737,7 +737,7 @@ class Order extends Component {
                         <EntreeCard name="Mango (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Mango (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
                         <EntreeCard name="Coconut (no pearls)" price = "3.99" type="drink" addToOrder={this.addToOrderKitchen}/>
-                        <EntreeCard name="Coconut (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/>
+                        <EntreeCard name="Coconut (with tapioca pearls)" price = "4.49" type="drink" addToOrder={this.addToOrderKitchen}/> */}
                     </div>
                 )
 
@@ -904,10 +904,10 @@ class Order extends Component {
                                                         <Row>
                                                             <Col>
                                                                 <p>Add any Pepsi fountain drinks to your order for $2.49</p>
-                                                                <p>We also sell bubble tea for $3.99 (+$0.50 for tapioca pearls)</p>
+                                                                {/* <p>We also sell bubble tea for $3.99 (+$0.50 for tapioca pearls)</p>
                                                                 <ul>
                                                                     <li>Our flavors include: thai, black, taro, matcha, lavender, strawberry, pineapple, mango</li>
-                                                                </ul>
+                                                                </ul> */}
                                                             </Col>
                                                         </Row>
                                                         <hr/>

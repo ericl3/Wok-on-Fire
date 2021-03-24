@@ -854,8 +854,8 @@ class Order extends Component {
                         </Modal>
                         <Row>
                             <Col>
-                                <h1>Online Order Form (Gig Harbor is Closed on Sundays)</h1>
-                                {/* <h1> Online Order Form (Gig Harbor is currently closed due to State Restrictions. We will reopen Gig Harbor on February 13th) </h1> */}
+                                {/* <h1>Online Order Form (Gig Harbor is Closed on Sundays)</h1> */}
+                                <h1> Online Order Form (Gig Harbor is closed temporarirly. We apologize for any incovenience).</h1>
                             </Col>
                         </Row>
                         <Row>
@@ -963,7 +963,7 @@ class Order extends Component {
                                                     onChange={(e) => this.handleChangeLocation(e)}
                                                 >
                                                     <option value = "Silverdale">Silverdale</option>
-                                                    <option value = "Gig Harbor" disabled={this.getTimePST().getDay() == 0}>Gig Harbor</option>
+                                                    <option value = "Gig Harbor" disabled={this.getTimePST().getDay() == 0 || true}>Gig Harbor</option>
                                                 </Form.Control>
                                             </Form>
                                         </Col>

@@ -654,9 +654,9 @@ class Order extends Component {
                     <h5 style={{marignTop: '1rem'}}>Entrees</h5>
                     <EntreeCard name="Bulgolgi Bowl" desc="famous korean dish, sliced beef marinated in soy sauce" price="11.99" type="entree" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Spicy Pork Bulgolgi Bowl" desc="famous korean dish, sliced pork marinated in spicy chili sauce" price="10.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Orange Chicken Bowl" desc="orange chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    {/* <EntreeCard name="Orange Chicken Bowl" desc="orange chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Pineapple Chicken Bowl" desc="pineapple chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Garlic Chicken Bowl" desc="garlic chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Garlic Chicken Bowl" desc="garlic chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/> */}
 
                     <h5 style={{marginTop: '1.5rem'}}>Sides/Appetizers</h5>
                     <EntreeCard name="Egg Rolls" desc="2 pcs. per order" price="3.49" type="side" addToOrder={this.addToOrderKitchen}/>
@@ -854,8 +854,8 @@ class Order extends Component {
                         </Modal>
                         <Row>
                             <Col>
-                                {/* <h1>Online Order Form (Gig Harbor is Closed on Sundays)</h1> */}
-                                <h1> Online Order Form (Gig Harbor is closed temporarirly. We apologize for any incovenience).</h1>
+                                <h1>Online Order Form (Gig Harbor is Closed on Sundays)</h1>
+                                {/* <h1> Online Order Form (Gig Harbor is closed temporarirly. We apologize for any incovenience).</h1> */}
                             </Col>
                         </Row>
                         <Row>
@@ -963,7 +963,7 @@ class Order extends Component {
                                                     onChange={(e) => this.handleChangeLocation(e)}
                                                 >
                                                     <option value = "Silverdale">Silverdale</option>
-                                                    <option value = "Gig Harbor" disabled={this.getTimePST().getDay() == 0 || true}>Gig Harbor</option>
+                                                    <option value = "Gig Harbor" disabled={this.getTimePST().getDay() == 0}>Gig Harbor</option>
                                                 </Form.Control>
                                             </Form>
                                         </Col>

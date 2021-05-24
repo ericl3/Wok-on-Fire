@@ -275,7 +275,7 @@ class Order extends Component {
 
     getGrillPriceForCart = (index) => {
         if (this.state.lunch) {
-            return "$" + (9.99 + this.state.grillOrders[index].proteinExtraPrice) + " (Lunch)"
+            return "$" + (10.99 + this.state.grillOrders[index].proteinExtraPrice) + " (Lunch)"
         } else {
             return "$" + (13.99 + this.state.grillOrders[index].proteinExtraPrice) + " (Dinner)"
         }
@@ -283,7 +283,7 @@ class Order extends Component {
 
     getGrillPriceForCalcs = (index) => {
         if (this.state.lunch) {
-            return 9.99 + this.state.grillOrders[index].proteinExtraPrice
+            return 10.99 + this.state.grillOrders[index].proteinExtraPrice
         } else {
             return 13.99 + this.state.grillOrders[index].proteinExtraPrice
         }
@@ -365,11 +365,14 @@ class Order extends Component {
             deal = Math.min(...prices)/2
         }
         if (this.state.location === "Gig Harbor") {
-            tax = (subtotal - deal) * 0.087
+            // tax = (subtotal - deal) * 0.087
+            tax = subtotal * 0.087
         } else {
-            tax = (subtotal - deal) * 0.09
+            // tax = (subtotal - deal) * 0.09
+            tax = subtotal * 0.09
         }
-        total = (subtotal - deal) + tax
+        // total = (subtotal - deal) + tax
+        total = subtotal + tax
         
         this.setState({
             subtotal: subtotal.toFixed(2),
@@ -652,14 +655,14 @@ class Order extends Component {
             (
                 <div>
                     <h5 style={{marignTop: '1rem'}}>Entrees</h5>
-                    <EntreeCard name="Bulgolgi Bowl" desc="famous korean dish, sliced beef marinated in soy sauce" price="11.99" type="entree" addToOrder={this.addToOrderKitchen}/>
-                    <EntreeCard name="Spicy Pork Bulgolgi Bowl" desc="famous korean dish, sliced pork marinated in spicy chili sauce" price="10.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Bulgolgi Bowl" desc="famous korean dish, sliced beef marinated in soy sauce" price="13.99" type="entree" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Spicy Pork Bulgolgi Bowl" desc="famous korean dish, sliced pork marinated in spicy chili sauce" price="12.99" type="entree" addToOrder={this.addToOrderKitchen}/>
                     {/* <EntreeCard name="Orange Chicken Bowl" desc="orange chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Pineapple Chicken Bowl" desc="pineapple chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Garlic Chicken Bowl" desc="garlic chicken served with rice" price="9.99" type="entree" addToOrder={this.addToOrderKitchen}/> */}
 
                     <h5 style={{marginTop: '1.5rem'}}>Sides/Appetizers</h5>
-                    <EntreeCard name="Egg Rolls" desc="2 pcs. per order" price="3.49" type="side" addToOrder={this.addToOrderKitchen}/>
+                    <EntreeCard name="Egg Rolls" desc="2 pcs. per order" price="3.99" type="side" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Chicken Wings (Regular)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Chicken Wings (Honey Garlic)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
                     <EntreeCard name="Chicken Wings (Spicy Honey Garlic)" desc="6 pcs. per order" price="5.99" type="side" addToOrder={this.addToOrderKitchen}/>
@@ -841,7 +844,7 @@ class Order extends Component {
                                         <h5>Review Order Total:</h5>        
                                         <p>Pickup Location: {this.state.location}</p>
                                         <p>Subtotal: ${this.state.subtotal}</p>
-                                        <p>Buy one get one 50% off (entree/grill): -${this.state.deal} (${this.state.subtotal - this.state.deal})</p>
+                                        {/* <p>Buy one get one 50% off (entree/grill): -${this.state.deal} (${this.state.subtotal - this.state.deal})</p> */}
                                         <p>Tax ({this.state.location === "Gig Harbor" ? "8.7%" : "9%"}): ${this.state.tax}</p>
                                         <p>Total: ${this.state.total}</p>
                                     </Col>
@@ -869,10 +872,9 @@ class Order extends Component {
                                                         <Row>
                                                             <Col>
                                                                 <p>Order Mongrolian Grill (served with rice and miso soup) using the form below:</p>
-                                                                <p>Lunch: $9.99</p>
+                                                                <p>Lunch: $10.99</p>
                                                                 <p>Dinner: $13.99</p>
                                                                 <p>We are currently serving: {this.state.lunch? "Lunch" : "Dinner"}</p>
-                                                                <p>We are offering a "buy one get one 50% off" promotion (entrees and grill orders only)! Promotion will show when adding two or more items to your order (applies only once per order).</p>
                                                             </Col>
                                                         </Row>
                                                         <hr/>
@@ -888,7 +890,7 @@ class Order extends Component {
                                                         <Row>
                                                             <Col>
                                                                 <p>Order from our Kitchen Menu:</p>
-                                                                <p>We are offering a "buy one get one 50% off" promotion (entrees and grill orders only)! Promotion will show when adding two or more items to your order (applies only once per order).</p>
+                                                                {/* <p>We are offering a "buy one get one 50% off" promotion (entrees and grill orders only)! Promotion will show when adding two or more items to your order (applies only once per order).</p> */}
                                                             </Col>
                                                         </Row>
                                                         <hr/>
@@ -971,7 +973,7 @@ class Order extends Component {
                                     <Row style={{marginTop: '1rem'}}>
                                         <Col>
                                             <p>Subtotal: ${this.state.subtotal}</p>
-                                            <p>Buy one get one 50% off (entree/grill): -${this.state.deal} (${this.state.subtotal - this.state.deal})</p>
+                                            {/* <p>Buy one get one 50% off (entree/grill): -${this.state.deal} (${this.state.subtotal - this.state.deal})</p> */}
                                             <p>Tax ({this.state.location === "Gig Harbor" ? "8.7%" : "9%"}): ${this.state.tax}</p>
                                             <p>Total: ${this.state.total}</p>
                                             <Button onClick={() => this.setState({showModal: true})} disabled={(this.state.grillOrders.length + this.state.kitchenOrders.length) < 1}>Continue to Place Order</Button>

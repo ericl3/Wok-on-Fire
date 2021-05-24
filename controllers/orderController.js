@@ -30,7 +30,7 @@ exports.createOrderWokOnFire = async(req, res) => {
         grillOrders[i].sauces = isEmpty(grillOrders[i].sauces) ? "None" : grillOrders[i].sauces.join(", ")
         grillOrders[i].toGoSauces = isEmpty(grillOrders[i].toGoSauces) ? "None" : grillOrders[i].toGoSauces.join(", ")
         if (lunch) {
-            grillOrders[i].price  = (9.99 + grillOrders[i].proteinExtraPrice)
+            grillOrders[i].price  = (10.99 + grillOrders[i].proteinExtraPrice)
         } else {
             grillOrders[i].price = (13.99 + grillOrders[i].proteinExtraPrice)
         }
